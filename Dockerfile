@@ -21,9 +21,6 @@ COPY --from=web-builder /web/dist /app/web/dist
 COPY ./free_one_api /app/free_one_api
 COPY ./requirements.txt ./main.py /app/
 
-# 安装Python依赖
-RUN pip install --no-cache -r requirements.txt \
-    && pip uninstall torch tensorflow transformers triton -y \
-    && rm -rf /usr/local/lib/python3.10/site-packages/nvidia*
+RUN /bin/sh -c pip install
 
 CMD ["python", "main.py"]
